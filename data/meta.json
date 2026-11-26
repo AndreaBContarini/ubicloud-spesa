@@ -1,0 +1,19 @@
+{
+ "months": [
+  "2026-11"
+ ],
+ "rates": {
+  "premium-16": 0.016,
+  "premium-2": 0.002,
+  "premium-30": 0.03,
+  "premium-4": 0.004,
+  "premium-8": 0.008,
+  "standard-16": 0.01,
+  "standard-2": 0.00125,
+  "standard-30": 0.01875,
+  "standard-4": 0.0025,
+  "standard-60": 0.0375,
+  "standard-8": 0.005
+ },
+ "updated_at": "2026-11-26T19:30:22Z"
+}

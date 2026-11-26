@@ -1,0 +1,257 @@
+{
+ "last_scan": "2026-11-26T19:30:22Z",
+ "seen_runs": {
+  "ambra-core/45821190876": {
+   "attempt": 1,
+   "created": "2026-11-26T12:36:13Z"
+  },
+  "ambra-core/45821191173": {
+   "attempt": 1,
+   "created": "2026-11-26T12:36:13Z"
+  },
+  "ambra-core/45821251390": {
+   "attempt": 1,
+   "created": "2026-11-26T12:36:36Z"
+  },
+  "ambra-core/45821251522": {
+   "attempt": 1,
+   "created": "2026-11-26T12:36:36Z"
+  },
+  "ambra-core/45821262334": {
+   "attempt": 1,
+   "created": "2026-11-26T12:36:40Z"
+  },
+  "ambra-core/45821269229": {
+   "attempt": 1,
+   "created": "2026-11-26T12:36:42Z"
+  },
+  "company-brain-ci-prova/45802397685": {
+   "attempt": 1,
+   "created": "2026-11-26T10:33:13Z"
+  },
+  "company-brain-ci-prova/45805612564": {
+   "attempt": 1,
+   "created": "2026-11-26T10:54:12Z"
+  },
+  "company-brain/45727438294": {
+   "attempt": 1,
+   "created": "2026-11-26T00:15:32Z"
+  },
+  "company-brain/45729160455": {
+   "attempt": 1,
+   "created": "2026-11-26T00:30:01Z"
+  },
+  "company-brain/45730745541": {
+   "attempt": 1,
+   "created": "2026-11-26T00:43:22Z"
+  },
+  "company-brain/45732117493": {
+   "attempt": 1,
+   "created": "2026-11-26T00:54:59Z"
+  },
+  "company-brain/45732122319": {
+   "attempt": 1,
+   "created": "2026-11-26T00:55:02Z"
+  },
+  "company-brain/45733122564": {
+   "attempt": 1,
+   "created": "2026-11-26T01:03:43Z"
+  },
+  "company-brain/45783120156": {
+   "attempt": 1,
+   "created": "2026-11-26T08:26:06Z"
+  },
+  "company-brain/45784791822": {
+   "attempt": 1,
+   "created": "2026-11-26T08:37:51Z"
+  },
+  "company-brain/45784801067": {
+   "attempt": 1,
+   "created": "2026-11-26T08:37:54Z"
+  },
+  "company-brain/45812205612": {
+   "attempt": 2,
+   "created": "2026-11-26T11:37:06Z"
+  },
+  "company-brain/45813533287": {
+   "attempt": 1,
+   "created": "2026-11-26T11:46:08Z"
+  },
+  "company-brain/45814191642": {
+   "attempt": 1,
+   "created": "2026-11-26T11:50:38Z"
+  },
+  "company-brain/45817878655": {
+   "attempt": 1,
+   "created": "2026-11-26T12:14:58Z"
+  },
+  "company-brain/45818421738": {
+   "attempt": 1,
+   "created": "2026-11-26T12:18:26Z"
+  },
+  "company-brain/45819183867": {
+   "attempt": 1,
+   "created": "2026-11-26T12:23:23Z"
+  },
+  "company-brain/45819869987": {
+   "attempt": 1,
+   "created": "2026-11-26T12:27:51Z"
+  },
+  "company-brain/45841102868": {
+   "attempt": 1,
+   "created": "2026-11-26T14:38:46Z"
+  },
+  "company-brain/45844494670": {
+   "attempt": 1,
+   "created": "2026-11-26T14:59:21Z"
+  },
+  "company-brain/45844496726": {
+   "attempt": 1,
+   "created": "2026-11-26T14:59:22Z"
+  },
+  "company-brain/45847289999": {
+   "attempt": 1,
+   "created": "2026-11-26T15:15:40Z"
+  },
+  "company-brain/45850842258": {
+   "attempt": 1,
+   "created": "2026-11-26T15:36:52Z"
+  },
+  "company-brain/45854680345": {
+   "attempt": 2,
+   "created": "2026-11-26T16:00:46Z"
+  },
+  "company-brain/45857573078": {
+   "attempt": 1,
+   "created": "2026-11-26T16:18:47Z"
+  },
+  "company-brain/45858599078": {
+   "attempt": 1,
+   "created": "2026-11-26T16:25:16Z"
+  },
+  "company-brain/45862959740": {
+   "attempt": 1,
+   "created": "2026-11-26T16:53:59Z"
+  },
+  "company-brain/45863858640": {
+   "attempt": 1,
+   "created": "2026-11-26T17:00:09Z"
+  },
+  "company-brain/45864173560": {
+   "attempt": 1,
+   "created": "2026-11-26T17:02:08Z"
+  },
+  "company-brain/45869646402": {
+   "attempt": 1,
+   "created": "2026-11-26T17:40:01Z"
+  },
+  "company-brain/45873632482": {
+   "attempt": 1,
+   "created": "2026-11-26T18:09:23Z"
+  },
+  "company-brain/45874400504": {
+   "attempt": 1,
+   "created": "2026-11-26T18:15:06Z"
+  },
+  "company-brain/45877935887": {
+   "attempt": 1,
+   "created": "2026-11-26T18:41:30Z"
+  },
+  "company-brain/45878024202": {
+   "attempt": 1,
+   "created": "2026-11-26T18:42:12Z"
+  },
+  "company-brain/45878361063": {
+   "attempt": 1,
+   "created": "2026-11-26T18:44:51Z"
+  },
+  "company-brain/45878598666": {
+   "attempt": 1,
+   "created": "2026-11-26T18:46:39Z"
+  },
+  "company-brain/45879487214": {
+   "attempt": 1,
+   "created": "2026-11-26T18:53:40Z"
+  },
+  "ga-alliance/45815800944": {
+   "attempt": 1,
+   "created": "2026-11-26T12:01:29Z"
+  },
+  "ga-alliance/45815801032": {
+   "attempt": 1,
+   "created": "2026-11-26T12:01:29Z"
+  },
+  "ga-alliance/45815801210": {
+   "attempt": 1,
+   "created": "2026-11-26T12:01:29Z"
+  },
+  "ga-alliance/45819595657": {
+   "attempt": 1,
+   "created": "2026-11-26T12:26:02Z"
+  },
+  "ga-alliance/45819595674": {
+   "attempt": 1,
+   "created": "2026-11-26T12:26:02Z"
+  },
+  "ga-alliance/45819595893": {
+   "attempt": 1,
+   "created": "2026-11-26T12:26:02Z"
+  },
+  "ga-alliance/45819649251": {
+   "attempt": 1,
+   "created": "2026-11-26T12:26:23Z"
+  },
+  "ga-alliance/45834551366": {
+   "attempt": 1,
+   "created": "2026-11-26T13:59:48Z"
+  },
+  "ga-alliance/45834560298": {
+   "attempt": 1,
+   "created": "2026-11-26T13:59:52Z"
+  },
+  "ga-alliance/45834560348": {
+   "attempt": 1,
+   "created": "2026-11-26T13:59:52Z"
+  },
+  "ga-alliance/45834560445": {
+   "attempt": 1,
+   "created": "2026-11-26T13:59:52Z"
+  },
+  "ga-alliance/45866327552": {
+   "attempt": 1,
+   "created": "2026-11-26T17:16:31Z"
+  },
+  "ga-alliance/45866336832": {
+   "attempt": 1,
+   "created": "2026-11-26T17:16:35Z"
+  },
+  "ga-alliance/45866336846": {
+   "attempt": 1,
+   "created": "2026-11-26T17:16:35Z"
+  },
+  "ga-alliance/45866337036": {
+   "attempt": 1,
+   "created": "2026-11-26T17:16:35Z"
+  },
+  "ga-alliance/45875191969": {
+   "attempt": 1,
+   "created": "2026-11-26T18:20:57Z"
+  },
+  "ga-alliance/45875191985": {
+   "attempt": 1,
+   "created": "2026-11-26T18:20:57Z"
+  },
+  "ga-alliance/45875192021": {
+   "attempt": 1,
+   "created": "2026-11-26T18:20:57Z"
+  },
+  "ga-alliance/45876593280": {
+   "attempt": 1,
+   "created": "2026-11-26T18:31:19Z"
+  },
+  "ga-alliance/45883392145": {
+   "attempt": 1,
+   "created": "2026-11-26T19:24:15Z"
+  }
+ }
+}

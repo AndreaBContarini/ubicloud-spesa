@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Spesa Ubicloud</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22%3E%3Crect width=%2216%22 height=%2216%22 rx=%224%22 fill=%22%233b5bdb%22/%3E%3Crect x=%223%22 y=%229%22 width=%222.5%22 height=%224%22 fill=%22white%22/%3E%3Crect x=%226.75%22 y=%226%22 width=%222.5%22 height=%227%22 fill=%22white%22/%3E%3Crect x=%2210.5%22 y=%223%22 width=%222.5%22 height=%2210%22 fill=%22white%22/%3E%3C/svg%3E">
+<style>
+:root {
+  --bg: #f6f7f9; --card: #ffffff; --text: #16181d; --muted: #646b78; --line: #e3e6eb;
+  --accent: #3b5bdb; --accent-soft: #dbe4ff; --warn: #e8590c; --bad: #c92a2a; --ok: #2b8a3e;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111317; --card: #1a1d23; --text: #e9ebef; --muted: #9aa1ad; --line: #2b3038;
+    --accent: #7491ff; --accent-soft: #26304d; --warn: #ff922b; --bad: #ff6b6b; --ok: #51cf66;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif; }
+main { max-width: 1040px; margin: 0 auto; padding: 28px 16px 48px; }
+header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 16px; margin-bottom: 20px; }
+h1 { font-size: 24px; margin: 0; letter-spacing: -0.01em; }
+h2 { font-size: 14px; margin: 0 0 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+.sub { color: var(--muted); font-size: 13px; }
+select { font: inherit; color: var(--text); background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 4px 8px; }
+.grid { display: grid; gap: 14px; }
+.kpis { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-bottom: 14px; }
+.two { grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); margin-top: 14px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; min-width: 0; }
+.kpi .label { color: var(--muted); font-size: 13px; }
+.kpi .value { font-size: 28px; font-weight: 650; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.kpi .hint { color: var(--muted); font-size: 12px; }
+.bar { position: relative; height: 14px; background: var(--accent-soft); border-radius: 7px; margin: 22px 0 8px; }
+.bar .fill { position: absolute; inset: 0 auto 0 0; background: var(--accent); border-radius: 7px; }
+.bar .proj { position: absolute; top: 0; bottom: 0; border-right: 2px dashed var(--muted); }
+.bar .mark { white-space: nowrap; position: absolute; top: -18px; bottom: -4px; border-left: 1px solid var(--muted); font-size: 11px; color: var(--muted); padding-left: 4px; }
+.bar .mark.cap { border-left: 0; border-right: 1px solid var(--bad); color: var(--bad); padding: 0 4px 0 0; transform: translateX(-100%); }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 12px; color: var(--muted); }
+svg text { fill: var(--muted); font-size: 11px; }
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 7px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); font-weight: 600; font-size: 12px; }
+td.n, th.n { text-align: right; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+.scroll { overflow-x: auto; }
+#runs td { white-space: nowrap; }
+.pill { display: inline-block; font-size: 11px; padding: 1px 7px; border-radius: 10px; background: var(--accent-soft); color: var(--accent); }
+.pill.premium { background: color-mix(in srgb, var(--warn) 18%, transparent); color: var(--warn); }
+.status-ok { color: var(--ok); } .status-warn { color: var(--warn); } .status-bad { color: var(--bad); }
+.notes { margin-top: 14px; color: var(--muted); font-size: 12.5px; }
+.notes p { margin: 4px 0; }
+.empty { color: var(--muted); padding: 24px 0; text-align: center; }
+a { color: var(--accent); }
+@media (max-width: 600px) { .bar .mark .long { display: none; } }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div>
+      <h1>Spesa Ubicloud</h1>
+      <div class="sub" id="updated">Carico…</div>
+    </div>
+    <label class="sub">Mese <select id="month"></select></label>
+  </header>
+
+  <section class="grid kpis">
+    <div class="card kpi"><div class="label">Speso nel mese</div><div class="value" id="k-spent">–</div><div class="hint" id="k-spent-h"></div></div>
+    <div class="card kpi"><div class="label">Proiezione a fine mese</div><div class="value" id="k-proj">–</div><div class="hint" id="k-proj-h"></div></div>
+    <div class="card kpi"><div class="label">Minuti fatturati</div><div class="value" id="k-min">–</div><div class="hint" id="k-min-h"></div></div>
+    <div class="card kpi"><div class="label">Costo medio per run</div><div class="value" id="k-run">–</div><div class="hint" id="k-run-h"></div></div>
+  </section>
+
+  <section class="card">
+    <h2>Rispetto al tetto di spesa</h2>
+    <div class="bar" id="budget-bar"></div>
+    <div class="legend"><span>■ speso</span><span>┆ proiezione</span><span id="budget-status"></span></div>
+  </section>
+
+  <section class="card" style="margin-top:14px">
+    <h2>Spesa per giorno</h2>
+    <div id="daily"></div>
+  </section>
+
+  <section class="grid two">
+    <div class="card"><h2>Per repository</h2><div class="scroll" id="by-repo"></div></div>
+    <div class="card"><h2>Per tipo di runner</h2><div class="scroll" id="by-runner"></div></div>
+    <div class="card"><h2>Per evento</h2><div class="scroll" id="by-event"></div></div>
+    <div class="card"><h2>Job più costosi</h2><div class="scroll" id="by-job"></div></div>
+  </section>
+
+  <section class="card" style="margin-top:14px">
+    <h2>Ultimi run</h2>
+    <div class="scroll" id="runs"></div>
+  </section>
+
+  <section class="notes">
+    <p>Stima calcolata dai job GitHub Actions girati sui runner Ubicloud: minuti di ogni job arrotondati per eccesso × prezzo al minuto del listino Ubicloud. Si aggiorna ogni 30 minuti.</p>
+    <p>Non conta il credito gratuito, la cache GitHub su Ubicloud e la concorrenza extra (centesimi). Con l'opzione premium accesa in console Ubicloud fattura premium anche i runner standard: quei periodi vanno segnati nello script.</p>
+    <p>Il numero esatto resta quello della console Ubicloud (Billing).</p>
+  </section>
+</main>
+
+<script>
+// Tetto di spesa e avvisi impostati nella console Ubicloud.
+const BUDGET = { cap: 60, alerts: [30, 45] };
+
+const usd = (v, d = 2) => "$" + v.toLocaleString("it-IT", { minimumFractionDigits: d, maximumFractionDigits: d });
+const num = v => v.toLocaleString("it-IT");
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const fmtDate = iso => new Date(iso).toLocaleString("it-IT", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
+const $ = id => document.getElementById(id);
+
+function groupBy(jobs, keyFn) {
+  const m = new Map();
+  for (const j of jobs) {
+    const k = keyFn(j);
+    const g = m.get(k) || { key: k, cost: 0, minutes: 0, jobs: 0, runs: new Set() };
+    g.cost += j.cost; g.minutes += j.minutes; g.jobs += 1; g.runs.add(j.repo + "/" + j.run_id);
+    m.set(k, g);
+  }
+  return [...m.values()].sort((a, b) => b.cost - a.cost);
+}
+
+function table(rows, cols) {
+  if (!rows.length) return '<div class="empty">Nessun dato</div>';
+  const head = cols.map(c => `<th class="${c.n ? "n" : ""}">${c.h}</th>`).join("");
+  const body = rows.map(r => "<tr>" + cols.map(c => `<td class="${c.n ? "n" : ""}">${c.f(r)}</td>`).join("") + "</tr>").join("");
+  return `<table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>`;
+}
+
+function share(total) { return g => total ? Math.round(g.cost / total * 100) + "%" : "–"; }
+
+function daysIn(month) { const [y, m] = month.split("-").map(Number); return new Date(Date.UTC(y, m, 0)).getUTCDate(); }
+
+function render(month, jobs, updatedAt) {
+  const total = jobs.reduce((s, j) => s + j.cost, 0);
+  const minutes = jobs.reduce((s, j) => s + j.minutes, 0);
+  const runs = groupBy(jobs, j => j.repo + "/" + j.run_id);
+  const nDays = daysIn(month);
+  const now = new Date(updatedAt);
+  const isCurrent = now.toISOString().slice(0, 7) === month;
+  // Il ritmo si misura dal primo giorno con job, non dall'inizio del mese (il servizio può partire a metà mese).
+  const firstDay = jobs.length ? new Date(jobs.reduce((a, j) => j.started < a ? j.started : a, jobs[0].started).slice(0, 10) + "T00:00:00Z") : new Date(month + "-01T00:00:00Z");
+  const monthEnd = new Date(Date.UTC(+month.slice(0, 4), +month.slice(5, 7), 1));
+  const elapsed = Math.max((now - firstDay) / 864e5, 1);
+  const daily = total / elapsed;
+  const projection = isCurrent ? total + daily * Math.max((monthEnd - now) / 864e5, 0) : total;
+
+  $("k-spent").textContent = usd(total);
+  $("k-spent-h").textContent = `${num(jobs.length)} job in ${num(runs.length)} run`;
+  $("k-proj").textContent = usd(projection);
+  $("k-proj-h").textContent = isCurrent ? `al ritmo di ${usd(daily)} al giorno` : "mese chiuso";
+  $("k-min").textContent = num(minutes);
+  $("k-min-h").textContent = `${(minutes / 60).toLocaleString("it-IT", { maximumFractionDigits: 1 })} ore di macchina`;
+  $("k-run").textContent = runs.length ? usd(total / runs.length, 3) : "–";
+  $("k-run-h").textContent = runs.length ? `${Math.round(minutes / runs.length)} minuti per run` : "";
+
+  // Barra del tetto
+  const scale = Math.max(BUDGET.cap, projection) * 1.05;
+  const pct = v => Math.min(v / scale * 100, 100).toFixed(2) + "%";
+  $("budget-bar").innerHTML =
+    `<div class="fill" style="width:${pct(total)}"></div>` +
+    (isCurrent ? `<div class="proj" style="width:${pct(projection)}"></div>` : "") +
+    BUDGET.alerts.map(a => `<div class="mark" style="left:${pct(a)}"><span class="long">avviso </span>${usd(a, 0)}</div>`).join("") +
+    `<div class="mark cap" style="left:${pct(BUDGET.cap)}"><span class="long">tetto </span>${usd(BUDGET.cap, 0)}</div>`;
+  const ref = isCurrent ? projection : total;
+  const [cls, msg] = ref >= BUDGET.cap ? ["status-bad", "oltre il tetto"]
+    : ref >= BUDGET.alerts[0] ? ["status-warn", "oltre il primo avviso"]
+    : ["status-ok", "sotto il primo avviso"];
+  $("budget-status").innerHTML = `<span class="${cls}">● ${isCurrent ? "proiezione" : "totale"} ${msg}</span>`;
+
+  // Barre giornaliere (SVG)
+  const perDay = Array(nDays).fill(0);
+  for (const j of jobs) perDay[new Date(j.started).getUTCDate() - 1] += j.cost;
+  const maxDay = Math.max(...perDay, 0.01);
+  const W = Math.max($("daily").clientWidth, 300), H = 180, P = { l: 44, r: 8, t: 10, b: 22 };
+  const bw = (W - P.l - P.r) / nDays;
+  const y = v => P.t + (H - P.t - P.b) * (1 - v / maxDay);
+  const ticks = [0, maxDay / 2, maxDay];
+  let svg = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Spesa per giorno">`;
+  for (const t of ticks) svg += `<line x1="${P.l}" x2="${W - P.r}" y1="${y(t)}" y2="${y(t)}" stroke="var(--line)"/><text x="${P.l - 6}" y="${y(t) + 4}" text-anchor="end">${usd(t)}</text>`;
+  perDay.forEach((v, i) => {
+    const x = P.l + i * bw;
+    if (v > 0) svg += `<rect x="${x + 1.5}" y="${y(v)}" width="${Math.max(bw - 3, 1)}" height="${H - P.b - y(v)}" rx="2" fill="var(--accent)"><title>${i + 1}/${month.slice(5)}: ${usd(v, 3)}</title></rect>`;
+    if ((i + 1) % 5 === 0 || i === 0) svg += `<text x="${x + bw / 2}" y="${H - 6}" text-anchor="middle">${i + 1}</text>`;
+  });
+  $("daily").innerHTML = svg + "</svg>";
+
+  const s = share(total);
+  const base = [
+    { h: "Costo", n: 1, f: g => usd(g.cost) },
+    { h: "Quota", n: 1, f: s },
+    { h: "Minuti", n: 1, f: g => num(g.minutes) },
+  ];
+  $("by-repo").innerHTML = table(groupBy(jobs, j => j.repo), [{ h: "Repository", f: g => esc(g.key) }, ...base, { h: "Run", n: 1, f: g => num(g.runs.size) }]);
+  $("by-runner").innerHTML = table(groupBy(jobs, j => j.runner), [{ h: "Runner", f: g => `<span class="pill ${g.key.startsWith("premium") ? "premium" : ""}">${esc(g.key)}</span>` }, ...base]);
+  const evName = { pull_request: "pull request", push: "push", workflow_dispatch: "lancio manuale", schedule: "programmato", merge_group: "merge queue" };
+  $("by-event").innerHTML = table(groupBy(jobs, j => evName[j.event] || j.event), [{ h: "Evento", f: g => esc(g.key) }, ...base]);
+  $("by-job").innerHTML = table(groupBy(jobs, j => j.job).slice(0, 8), [{ h: "Job", f: g => esc(g.key) }, { h: "Costo", n: 1, f: g => usd(g.cost) }, { h: "Min/run", n: 1, f: g => Math.round(g.minutes / g.runs.size) }]);
+
+  const runRows = runs.map(g => {
+    const js = jobs.filter(j => j.repo + "/" + j.run_id === g.key);
+    const first = js.reduce((a, b) => a.started < b.started ? a : b);
+    return { ...g, first, attempts: Math.max(...js.map(j => j.attempt || 1)) };
+  }).sort((a, b) => b.first.started.localeCompare(a.first.started)).slice(0, 40);
+  $("runs").innerHTML = table(runRows, [
+    { h: "Quando", f: r => fmtDate(r.first.started) },
+    { h: "Repository", f: r => esc(r.first.repo) },
+    { h: "Workflow", f: r => esc(r.first.workflow) + (r.attempts > 1 ? ` <span class="sub">(${r.attempts} tentativi)</span>` : "") },
+    { h: "Branch", f: r => esc(r.first.branch) },
+    { h: "Minuti", n: 1, f: r => num(r.minutes) },
+    { h: "Costo", n: 1, f: r => usd(r.cost, 3) },
+  ]);
+}
+
+async function getJSON(path) {
+  const res = await fetch(path + "?t=" + Date.now(), { cache: "no-store" });
+  if (!res.ok) throw new Error(path + ": " + res.status);
+  return res.json();
+}
+
+(async () => {
+  try {
+    const meta = await getJSON("data/meta.json");
+    $("updated").textContent = "Aggiornato " + new Date(meta.updated_at).toLocaleString("it-IT", { dateStyle: "medium", timeStyle: "short" });
+    const sel = $("month");
+    const fmtMonth = m => new Date(m + "-15").toLocaleString("it-IT", { month: "long", year: "numeric" });
+    sel.innerHTML = [...meta.months].reverse().map(m => `<option value="${m}">${fmtMonth(m)}</option>`).join("");
+    const show = async m => render(m, Object.values((await getJSON(`data/${m}.json`)).jobs), meta.updated_at);
+    sel.onchange = () => show(sel.value);
+    if (meta.months.length) await show(sel.value);
+    else $("daily").innerHTML = '<div class="empty">Ancora nessun job su Ubicloud</div>';
+  } catch (e) {
+    $("updated").textContent = "Errore nel caricare i dati: " + e.message;
+  }
+})();
+</script>
+</body>
+</html>
